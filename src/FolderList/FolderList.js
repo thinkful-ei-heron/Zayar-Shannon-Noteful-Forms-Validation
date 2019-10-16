@@ -10,7 +10,7 @@ class FolderList extends Component {
         return (
             <>
                 {this.context.folders.map((folder) => {
-                    return (<div className={(folder.id === this.props.id) ? 'background' : ''}><Link key={folder.id} to={'/folders/' + folder.id}>{folder.name}</Link></div>);
+                    return (<div key={folder.id} className={(folder.id === this.props.id) ? 'background' : ''}><Link key={folder.id} to={'/folders/' + folder.id}>{folder.name}</Link></div>);
                 })
                 }
                 <button> Add Folder</button>

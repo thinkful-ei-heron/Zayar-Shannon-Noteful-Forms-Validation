@@ -5,6 +5,7 @@ import NotefulContext from '../NotefulContext';
 
 class NotesList extends Component {
     static contextType= NotefulContext;
+
     render() {
         const currentFolderID = this.props.folderId;
         let notes = this.context.notes;
@@ -13,7 +14,7 @@ class NotesList extends Component {
         }
         return <>
             {notes.map(note =>
-                <Note key={note.id} id={note.id} name={note.name} content={note.modified}/>
+                <Note key={note.id} id={note.id} name={note.name} deleteNote={this.context.deleteNote} content={note.modified}/>
             )}
         </>;
     }
