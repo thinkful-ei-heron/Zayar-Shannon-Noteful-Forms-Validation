@@ -1,0 +1,6 @@
+.Note {
+  padding: 16px;
+  margin: 16px;
+  border: 1px solid black;
+  width: inherit;
+}

@@ -1,0 +1,41 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 25vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 8rem;
+  color: white;
+}
+
+.App-link {
+  color: #09d3ac;
+}
+.SideNav {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: left;
+  width: 15vw;
+
+}
+.SideNav > div, .SideNav > button{
+  padding: 16px;
+  font-size: x-large;
+}
+.Main {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: right;
+  width: 74vw;
+}
