@@ -12,7 +12,6 @@ export default class AddFolder extends Component {
     }
   }
   setFolder(value){
-    console.log(value);
     this.setState({
       newFolderName: value,
       touched:true,

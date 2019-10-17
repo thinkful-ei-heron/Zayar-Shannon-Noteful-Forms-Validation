@@ -14,18 +14,24 @@ class FolderList extends Component {
 
 
     handleAddFolder = (event) => {
-        event.preventDefault();
-        const newFolderName = document.getElementById('addfolder-input').value
+        try {
+            event.preventDefault();
+            const newFolderName = document.getElementById('addfolder-input').value
 
-        this.context.addFolder(newFolderName)
-        //API stuff
-        this.setState({
-            addingFolder: false
+            this.context.addFolder(newFolderName)
+            //API stuff
+            this.setState({
+                addingFolder: false
 
-        })
+            })
+        } catch(error){
+            throw new Error(error)
+        }
+
     }
 
     render() {
+        throw new Error('hi')
         return (
             <>
                 {this.context.folders.map((folder) => {

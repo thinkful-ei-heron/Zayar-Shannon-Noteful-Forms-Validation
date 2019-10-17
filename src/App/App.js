@@ -6,6 +6,7 @@ import NoteList from "../NoteList/NoteList";
 import AddNote from '../AddNote/AddNote';
 import DetailedNote from "../DetailedNote/DetailedNote";
 import NotefulContext from '../NotefulContext';
+import ErrorBoundary from '../ErrorBoundary';
 import cuid from 'cuid';
 
 class App extends Component {
@@ -13,10 +14,10 @@ class App extends Component {
         notes: [],
         folders: [],
         addingNote: false,
+        errors: null
     };
 
     addNote = (newNoteName, newNoteContent, folderId) => {
-        console.log(newNoteName)
         const date = new Date();
         const newNoteObj = {
             id: cuid(),
@@ -84,12 +85,14 @@ class App extends Component {
 
     render() {
         return (
+        <ErrorBoundary>
             <NotefulContext.Provider value={{
                 notes: this.state.notes,
                 folders: this.state.folders,
                 deleteNote: this.deleteNote,
                 addFolder: this.addFolder,
-                addNote: this.addNote
+                addNote: this.addNote,
+                errors: this.state.errors
 
             }}>
 
@@ -97,6 +100,7 @@ class App extends Component {
                 <div className="App">
                     <div className="App-header">
                         <Link to='/'>Noteful </Link>
+                        {this.state.errors && <p>{this.state.errors}</p>}
 
                     </div>
                     <div className='SideNav'>
@@ -130,9 +134,11 @@ class App extends Component {
 
                         <button onClick={()=>this.setState({addingNote:true})}> Add Note</button>
                         {this.state.addingNote && <AddNote />}
-                    </div>
+
+                </div>
                 </div>
             </NotefulContext.Provider>
+            </ErrorBoundary>
         )
     }
 }
