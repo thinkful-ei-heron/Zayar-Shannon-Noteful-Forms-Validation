@@ -3,6 +3,7 @@ import {Link, Route, Switch} from 'react-router-dom'
 import './App.css';
 import FolderList from "../FolderList/FolderList";
 import NoteList from "../NoteList/NoteList";
+import AddNote from '../AddNote/AddNote';
 import DetailedNote from "../DetailedNote/DetailedNote";
 import NotefulContext from '../NotefulContext';
 import cuid from 'cuid';
@@ -11,11 +12,39 @@ class App extends Component {
     state = {
         notes: [],
         folders: [],
+        addingNote: false,
     };
 
-    addNote = newNote => {
+    addNote = (newNoteName, newNoteContent, folderId) => {
+        console.log(newNoteName)
+        const date = new Date();
+        const newNoteObj = {
+            id: cuid(),
+            name: newNoteName,
+            modified: date.toDateString(),
+            folderId: folderId,
+            content: newNoteContent,
+        }
 
-    }
+        const newNoteJson = JSON.stringify(newNoteObj);
+        fetch('http://localhost:9090/notes',
+        {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json'},
+            body: newNoteJson
+        }
+    ).then(resp => {
+        if (resp.ok) {
+
+            return resp.json()
+        } else {throw new Error(resp.status)}
+    }).then(data => this.setState({
+        notes:
+            [...this.state.notes, data]
+    })).then(()=> this.setState({addingNote:false}))
+        .catch(err => { throw new Error(err) })
+}
+
 
     addFolder = folderName => {
         const newObj = {
@@ -61,6 +90,7 @@ class App extends Component {
                 deleteNote: this.deleteNote,
                 addFolder: this.addFolder,
                 addNote: this.addNote
+
             }}>
 
 
@@ -98,7 +128,8 @@ class App extends Component {
                             <Route exact path='/' render={(routeProps) => <NoteList/>}/>
                         </Switch>
 
-                        <button> Add Note</button>
+                        <button onClick={()=>this.setState({addingNote:true})}> Add Note</button>
+                        {this.state.addingNote && <AddNote />}
                     </div>
                 </div>
             </NotefulContext.Provider>

@@ -9,7 +9,6 @@ class FolderList extends Component {
     static contextType = NotefulContext;
     state = {
         addingFolder: {add: false},
-        newFolderName:null
     }
 
 
