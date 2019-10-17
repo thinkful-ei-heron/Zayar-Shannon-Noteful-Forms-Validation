@@ -5,6 +5,7 @@ import FolderList from "../FolderList/FolderList";
 import NoteList from "../NoteList/NoteList";
 import DetailedNote from "../DetailedNote/DetailedNote";
 import NotefulContext from '../NotefulContext';
+import cuid from 'cuid';
 
 class App extends Component {
     state = {
@@ -12,6 +13,33 @@ class App extends Component {
         folders: [],
     };
 
+    addNote = newNote => {
+
+    }
+
+    addFolder = folderName => {
+        const newObj = {
+            id: cuid(),
+            name: folderName,
+        }
+        const finalObj = JSON.stringify(newObj)
+        fetch('http://localhost:9090/folders',
+            {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json'},
+                body: finalObj
+            }
+        ).then(resp => {
+            if (resp.ok) {
+
+                return resp.json()
+            } else {throw new Error(resp.status)}
+        }).then(data => this.setState({
+            folders:
+                [...this.state.folders, data]
+        }))
+            .catch(err => { throw new Error(err) })
+    }
 
     componentDidMount() {
         fetch('http://localhost:9090/folders').then(res => res.json()).then(data => this.setState({folders: data}));
@@ -30,7 +58,9 @@ class App extends Component {
             <NotefulContext.Provider value={{
                 notes: this.state.notes,
                 folders: this.state.folders,
-                deleteNote: this.deleteNote
+                deleteNote: this.deleteNote,
+                addFolder: this.addFolder,
+                addNote: this.addNote
             }}>
 
 
