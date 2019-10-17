@@ -125,12 +125,21 @@ class App extends Component {
                     </div>
                     <div className='Main'>
                         <Switch>
-                            <Route path='/notes/:noteId' render={(routeProps) => <DetailedNote
-                                note={this.state.notes.find(note => note.id === routeProps.match.params.noteId)}/>}/>
+                            <Route path='/notes/:noteId'
+                                render={(routeProps) =>
+                                    <DetailedNote note={this.state.notes.find(note => note.id === routeProps.match.params.noteId)}/>
+                                }
+                            />
                             <Route path='/folders/:folderId'
-                                    render={(routeProps) => <NoteList folderId={routeProps.match.params.folderId}
-                                   />}/>
-                            <Route exact path='/' render={(routeProps) => <NoteList/>}/>
+                                render={(routeProps) =>
+                                    <NoteList folderId={routeProps.match.params.folderId}/>
+                                }
+                            />
+                            <Route exact path='/'
+                                render={() =>
+                                    <NoteList />
+                                }
+                            />
                         </Switch>
 
                         <button onClick={()=>this.setState({addingNote:true})}> Add Note</button>

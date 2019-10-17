@@ -34,20 +34,20 @@ class FolderList extends Component {
     render() {
 
         return (
-            <>
+            <div className="folderlist">
                 {this.context.folders.map((folder) => {
                     return (<div key={folder.id} className={(folder.id === this.props.id) ? 'background' : ''}><Link key={folder.id} to={'/folders/' + folder.id}>{folder.name}</Link></div>);
                     })
                 }
-                {!this.state.addingFolder &&
+                {!this.state.addingFolder.add &&
                     (<button onClick={() =>
                     this.setState({ addingFolder: { add: true } })}
                         >Add Folder</button>)
                 }
-                {this.state.addingFolder &&
+                {this.state.addingFolder.add &&
                     (<AddFolder handleAddFolder={this.handleAddFolder} />)
                 }
-            </>);
+            </div>);
     }
 }
 

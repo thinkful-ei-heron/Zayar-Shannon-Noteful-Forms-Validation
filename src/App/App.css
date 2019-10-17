@@ -25,7 +25,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: left;
-  width: 15vw;
+  flex-shrink: 1;
+  width: 15%;
 
 }
 .SideNav > div, .SideNav > button{
@@ -37,5 +38,10 @@
   flex-direction: column;
   align-items: center;
   justify-content: right;
-  width: 74vw;
+  width: 75%;
+}
+
+.addfolder {
+  margin-top: 1em;
+  padding: .5em;
 }

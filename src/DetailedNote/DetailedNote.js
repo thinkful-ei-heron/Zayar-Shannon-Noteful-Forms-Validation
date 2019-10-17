@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import '../App/App.css';
 import {Link} from "react-router-dom";
 import NotefulContext from "../NotefulContext";
+import PropTypes from 'prop-types';
 
 class DetailedNote extends Component {
     static contextType= NotefulContext;
@@ -18,4 +19,7 @@ class DetailedNote extends Component {
     }
 }
 
+DetailedNote.propTypes = {
+    note: PropTypes.object
+}
 export default DetailedNote;
