@@ -4,6 +4,7 @@ import './FolderList.css';
 import AddFolder from './AddFolder';
 import {Link} from "react-router-dom";
 import NotefulContext from '../NotefulContext';
+import PropTypes from 'prop-types';
 
 class FolderList extends Component {
     static contextType = NotefulContext;
@@ -31,7 +32,7 @@ class FolderList extends Component {
     }
 
     render() {
-        throw new Error('hi')
+
         return (
             <>
                 {this.context.folders.map((folder) => {
@@ -48,6 +49,10 @@ class FolderList extends Component {
                 }
             </>);
     }
+}
+
+FolderList.propTypes = {
+    id: PropTypes.string
 }
 
 export default FolderList;

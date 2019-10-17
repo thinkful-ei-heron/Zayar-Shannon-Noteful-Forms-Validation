@@ -85,7 +85,7 @@ class App extends Component {
 
     render() {
         return (
-        <ErrorBoundary>
+
             <NotefulContext.Provider value={{
                 notes: this.state.notes,
                 folders: this.state.folders,
@@ -103,6 +103,7 @@ class App extends Component {
                         {this.state.errors && <p>{this.state.errors}</p>}
 
                     </div>
+                    <ErrorBoundary>
                     <div className='SideNav'>
                         <Switch>
                             <Route path='/notes/:noteId' render={(routeProps) => {
@@ -127,7 +128,7 @@ class App extends Component {
                             <Route path='/notes/:noteId' render={(routeProps) => <DetailedNote
                                 note={this.state.notes.find(note => note.id === routeProps.match.params.noteId)}/>}/>
                             <Route path='/folders/:folderId'
-                                   render={(routeProps) => <NoteList folderId={routeProps.match.params.folderId}
+                                    render={(routeProps) => <NoteList folderId={routeProps.match.params.folderId}
                                    />}/>
                             <Route exact path='/' render={(routeProps) => <NoteList/>}/>
                         </Switch>
@@ -136,9 +137,11 @@ class App extends Component {
                         {this.state.addingNote && <AddNote />}
 
                 </div>
+                </ErrorBoundary>
                 </div>
+
             </NotefulContext.Provider>
-            </ErrorBoundary>
+
         )
     }
 }

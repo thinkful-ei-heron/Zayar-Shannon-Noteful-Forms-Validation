@@ -2,8 +2,9 @@ import React, {Component} from 'react';
 import '../App/App.css';
 import Note from "../Note/Note";
 import NotefulContext from '../NotefulContext';
+import PropTypes from 'prop-types';
 
-class NotesList extends Component {
+class NoteList extends Component {
     static contextType= NotefulContext;
 
     render() {
@@ -20,4 +21,8 @@ class NotesList extends Component {
     }
 }
 
-export default NotesList;
+NoteList.propTypes = {
+    folderId: PropTypes.string,
+}
+
+export default NoteList;
